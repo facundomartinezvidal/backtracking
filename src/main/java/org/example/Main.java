@@ -12,16 +12,17 @@ public class Main {
         T.add(4);
         int M = 2;
 
-        Vector<Integer> SAct = new Vector<>();
-        for (int i = 0; i < T.size(); i++) {
-            SAct.add(0);
-        }
         Vector<Integer> SFin = new Vector<>();
-        int[] max = {Integer.MAX_VALUE};   // por referencia: persiste entre ramas
-
-        AsignarTareas.minimizarTiempoSinGreedy(T, SAct, SFin, max, M, 0);
-
-        System.out.println("Tiempo: " + max[0]);
+        int tiempo = AsignarTareas.minimizarTiempoSinGreedy(T, SFin, M);
+        System.out.println("Sin Greedy -> Tiempo: " + tiempo);
         System.out.println("Asignación: " + SFin);
+
+        // La versión con Greedy ordena T, por eso se usa una copia
+        Vector<Integer> TOrd = new Vector<>(T);
+        Vector<Integer> SFinG = new Vector<>();
+        int tiempoG = AsignarTareas.minimizarTiempoConGreedy(TOrd, SFinG, M);
+        System.out.println("Con Greedy -> Tiempo: " + tiempoG);
+        System.out.println("Tareas ordenadas: " + TOrd);
+        System.out.println("Asignación: " + SFinG);
     }
 }
